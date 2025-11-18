@@ -3,6 +3,20 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Water Nest Brand Colors */
+  --water-blue: #0284c7;
+  --water-blue-light: #38bdf8;
+  --water-blue-dark: #075985;
+  --water-teal: #14b8a6;
+  --water-green: #10b981;
+  --accent-orange: #f97316;
+  --accent-yellow: #f59e0b;
+  
+  /* Neutrals */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-900: #111827;
 }
 
 @theme inline {
@@ -10,6 +24,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Custom colors */
+  --color-water-blue: var(--water-blue);
+  --color-water-blue-light: var(--water-blue-light);
+  --color-water-blue-dark: var(--water-blue-dark);
+  --color-water-teal: var(--water-teal);
+  --color-water-green: var(--water-green);
+  --color-accent-orange: var(--accent-orange);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +45,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  background-size: 1000px 100%;
 }
