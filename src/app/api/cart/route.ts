@@ -13,10 +13,13 @@ export async function GET() {
       );
     }
 
-    const cart = await prisma.cart.findUnique({
-      where: {
+    // Upsert to avoid separate create query
+    const cart = await prisma.cart.upsert({
+      where: { userId: session.user.id },
+      create: {
         userId: session.user.id,
       },
+      update: {},
       include: {
         items: {
           include: {
@@ -35,23 +38,6 @@ export async function GET() {
         },
       },
     });
-
-    if (!cart) {
-      // Create cart if doesn't exist
-      const newCart = await prisma.cart.create({
-        data: {
-          userId: session.user.id,
-        },
-        include: {
-          items: {
-            include: {
-              product: true,
-            },
-          },
-        },
-      });
-      return NextResponse.json(newCart);
-    }
 
     return NextResponse.json(cart);
   } catch (error) {
@@ -78,109 +64,79 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    console.log('📦 [API] Request body:', body);
     const { productId, quantity } = body;
 
     if (!productId || !quantity || quantity < 1) {
-      console.log('❌ [API] Invalid input:', { productId, quantity });
       return NextResponse.json(
         { error: "Invalid product or quantity" },
         { status: 400 }
       );
     }
 
-    // Get or create cart
-    console.log('🔍 [API] Finding cart for user:', session.user.id);
-    let cart = await prisma.cart.findUnique({
-      where: { userId: session.user.id },
-    });
-
-    if (!cart) {
-      console.log('➕ [API] Creating new cart');
-      cart = await prisma.cart.create({
-        data: { userId: session.user.id },
+    // Use transaction for better performance and data consistency
+    const updatedCart = await prisma.$transaction(async (tx) => {
+      // Check product exists and has stock first
+      const product = await tx.product.findUnique({
+        where: { id: productId },
+        select: { id: true, stock: true },
       });
-    } else {
-      console.log('✅ [API] Cart found:', cart.id);
-    }
 
-    // Check if product exists and has stock
-    console.log('🔍 [API] Looking up product:', productId);
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-      select: { id: true, name: true, stock: true },
-    });
+      if (!product) {
+        throw new Error("Product not found");
+      }
 
-    if (!product) {
-      console.log('❌ [API] Product not found:', productId);
-      return NextResponse.json(
-        { error: "Product not found" },
-        { status: 404 }
-      );
-    }
+      if (product.stock < quantity) {
+        throw new Error("Insufficient stock");
+      }
 
-    console.log('✅ [API] Product found:', product.name, '- Stock:', product.stock);
+      // Upsert cart (get existing or create new)
+      const cart = await tx.cart.upsert({
+        where: { userId: session.user.id },
+        create: { userId: session.user.id },
+        update: {},
+        select: { id: true },
+      });
 
-    if (product.stock < quantity) {
-      console.log('❌ [API] Insufficient stock:', product.stock, '<', quantity);
-      return NextResponse.json(
-        { error: "Insufficient stock" },
-        { status: 400 }
-      );
-    }
-
-    // Check if item already in cart
-    const existingItem = await prisma.cartItem.findUnique({
-      where: {
-        cartId_productId: {
-          cartId: cart.id,
-          productId,
+      // Upsert cart item (update quantity if exists, create if not)
+      await tx.cartItem.upsert({
+        where: {
+          cartId_productId: {
+            cartId: cart.id,
+            productId,
+          },
         },
-      },
-    });
-
-    if (existingItem) {
-      // Update quantity
-      console.log('📝 [API] Updating existing cart item');
-      await prisma.cartItem.update({
-        where: { id: existingItem.id },
-        data: { quantity: existingItem.quantity + quantity },
-      });
-    } else {
-      // Create new cart item
-      console.log('➕ [API] Creating new cart item');
-      await prisma.cartItem.create({
-        data: {
+        create: {
           cartId: cart.id,
           productId,
           quantity,
         },
+        update: {
+          quantity: { increment: quantity },
+        },
       });
-    }
 
-    // Return updated cart
-    console.log('📥 [API] Fetching updated cart');
-    const updatedCart = await prisma.cart.findUnique({
-      where: { id: cart.id },
-      include: {
-        items: {
-          include: {
-            product: {
-              select: {
-                id: true,
-                name: true,
-                slug: true,
-                price: true,
-                images: true,
-                stock: true,
+      // Return full cart with items
+      return tx.cart.findUnique({
+        where: { id: cart.id },
+        include: {
+          items: {
+            include: {
+              product: {
+                select: {
+                  id: true,
+                  name: true,
+                  slug: true,
+                  price: true,
+                  images: true,
+                  stock: true,
+                },
               },
             },
           },
         },
-      },
+      });
     });
 
-    console.log('✅ [API] Cart updated successfully, items count:', updatedCart?.items.length);
     return NextResponse.json(updatedCart);
   } catch (error) {
     console.error("❌ [API] Add to cart error:", error);
