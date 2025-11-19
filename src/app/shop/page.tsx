@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -160,6 +160,8 @@ const sortOptions = [
 export default function ShopPage() {
   const router = useRouter();
   const { addToCart, isLoading } = useCart();
+  const [products, setProducts] = useState(allProducts);
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [selectedPriceRange, setSelectedPriceRange] = useState(priceRanges[0]);
@@ -169,6 +171,39 @@ export default function ShopPage() {
   const [inStockOnly, setInStockOnly] = useState(false);
   const [onSaleOnly, setOnSaleOnly] = useState(false);
   const [addingToCart, setAddingToCart] = useState<string | null>(null);
+
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          const formattedProducts = data.products.map((p: any) => ({
+            id: p.id,
+            name: p.name,
+            category: p.category?.name || "Uncategorized",
+            price: p.price,
+            originalPrice: p.compareAtPrice || p.price,
+            image: p.images?.[0] || "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80",
+            rating: p.averageRating || 0,
+            reviews: p.reviewCount || 0,
+            inStock: p.stock > 0,
+            featured: p.featured,
+            sku: p.sku
+          }));
+          setProducts(formattedProducts);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+        toast.error('Failed to load products');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = async (productId: string, productName: string) => {
     setAddingToCart(productId);
@@ -190,7 +225,7 @@ export default function ShopPage() {
   };
 
   // Filter products
-  let filteredProducts = allProducts.filter((product) => {
+  let filteredProducts = products.filter((product) => {
     const matchesSearch = searchQuery === "" || 
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.category.toLowerCase().includes(searchQuery.toLowerCase());

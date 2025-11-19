@@ -288,7 +288,7 @@ export default function CheckoutPage() {
                         id="province"
                         value={shippingInfo.province}
                         onChange={(e) => setShippingInfo({...shippingInfo, province: e.target.value})}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        className="flex h-10 w-full rounded-md border border-input bg-white text-gray-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                       >
                         <option>Gauteng</option>
                         <option>Western Cape</option>

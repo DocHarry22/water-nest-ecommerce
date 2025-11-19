@@ -12,19 +12,19 @@ import {
 } from "lucide-react";
 
 interface Order {
-  id: number;
+  id: string;
   orderNumber: string;
   status: string;
   paymentStatus: string;
   total: number;
   createdAt: string;
   user: {
-    id: number;
+    id: string;
     name: string;
     email: string;
   };
   items: {
-    id: number;
+    id: string;
     quantity: number;
     price: number;
     product: {
@@ -72,8 +72,9 @@ export default function AdminOrdersPage() {
     }
   };
 
-  const updateOrderStatus = async (orderId: number, newStatus: string) => {
+  const updateOrderStatus = async (orderId: string, newStatus: string) => {
     try {
+      console.log('🔄 Updating order status:', { orderId, newStatus });
       const response = await fetch(`/api/orders/${orderId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -81,12 +82,15 @@ export default function AdminOrdersPage() {
       });
 
       if (response.ok) {
+        console.log('✅ Order status updated successfully');
         await fetchOrders();
       } else {
-        alert("Failed to update order status");
+        const errorData = await response.json();
+        console.error('❌ Failed to update order:', errorData);
+        alert(`Failed to update order status: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error("Error updating order:", error);
+      console.error("❌ Error updating order:", error);
       alert("Failed to update order status");
     }
   };

@@ -68,23 +68,31 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addToCart = async (productId: string, quantity: number = 1) => {
     setIsLoading(true);
+    console.log('🛒 Adding to cart:', { productId, quantity, authenticated: !!session?.user });
+    
     try {
       if (session?.user) {
         // Add to database cart
+        console.log('📤 Sending to /api/cart...');
         const response = await fetch("/api/cart", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ productId, quantity }),
         });
 
+        const responseData = await response.json();
+        console.log('📥 API Response:', { status: response.status, data: responseData });
+
         if (response.ok) {
-          const updatedCart = await response.json();
-          setCart(updatedCart);
+          setCart(responseData);
+          console.log('✅ Cart updated successfully');
         } else {
-          throw new Error("Failed to add to cart");
+          console.error('❌ API error:', responseData);
+          throw new Error(responseData.error || "Failed to add to cart");
         }
       } else {
         // Add to guest cart (localStorage)
+        console.log('👤 Guest user - using localStorage');
         const guestCart = localStorage.getItem("guest-cart");
         const currentCart: Cart = guestCart 
           ? JSON.parse(guestCart) 
@@ -95,12 +103,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         );
 
         if (existingItemIndex > -1) {
+          console.log('📦 Updating existing item quantity');
           currentCart.items[existingItemIndex].quantity += quantity;
         } else {
           // Fetch product details
+          console.log(`🔍 Fetching product details: /api/products/${productId}`);
           const productResponse = await fetch(`/api/products/${productId}`);
+          
           if (productResponse.ok) {
             const product = await productResponse.json();
+            console.log('✅ Product fetched:', product.name);
             currentCart.items.push({
               id: `guest-${Date.now()}`,
               productId,
@@ -109,16 +121,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             });
           } else {
             const errorText = await productResponse.text();
-            console.error("Failed to fetch product:", errorText);
-            throw new Error(`Failed to fetch product details: ${errorText}`);
+            console.error('❌ Failed to fetch product:', { status: productResponse.status, error: errorText });
+            throw new Error(`Failed to fetch product (${productResponse.status}): ${errorText}`);
           }
         }
 
         localStorage.setItem("guest-cart", JSON.stringify(currentCart));
         setCart(currentCart);
+        console.log('✅ Guest cart updated in localStorage');
       }
     } catch (error) {
-      console.error("Add to cart error:", error);
+      console.error("❌ Add to cart error:", error);
       throw error;
     } finally {
       setIsLoading(false);

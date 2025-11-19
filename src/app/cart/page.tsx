@@ -226,7 +226,7 @@ export default function CartPage() {
               ))}
 
               {/* Continue Shopping */}
-              <Link href="/products">
+              <Link href="/shop">
                 <Button variant="outline" className="w-full border-2">
                   ← Continue Shopping
                 </Button>
