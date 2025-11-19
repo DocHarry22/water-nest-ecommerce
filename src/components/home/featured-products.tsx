@@ -42,8 +42,7 @@ export function FeaturedProducts() {
           const data = await response.json();
           setProducts(data.products || []);
         }
-      } catch (error) {
-        console.error('Failed to fetch featured products:', error);
+      } catch {
       } finally {
         setLoading(false);
       }
@@ -61,7 +60,7 @@ export function FeaturedProducts() {
           onClick: () => router.push("/cart"),
         },
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to add to cart", {
         description: "Please try again",
       });

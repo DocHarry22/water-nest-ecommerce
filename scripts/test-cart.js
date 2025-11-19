@@ -1,7 +1,5 @@
 import http from 'http';
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-
 console.log('🧪 Testing Cart API...\n');
 
 // Test 1: Try to add product to cart (guest - should fail with 401)

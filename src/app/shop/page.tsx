@@ -161,7 +161,7 @@ export default function ShopPage() {
   const router = useRouter();
   const { addToCart, isLoading } = useCart();
   const [products, setProducts] = useState(allProducts);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [selectedPriceRange, setSelectedPriceRange] = useState(priceRanges[0]);
@@ -180,6 +180,7 @@ export default function ShopPage() {
         const response = await fetch('/api/products');
         if (response.ok) {
           const data = await response.json();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const formattedProducts = data.products.map((p: any) => ({
             id: p.id,
             name: p.name,
@@ -195,8 +196,7 @@ export default function ShopPage() {
           }));
           setProducts(formattedProducts);
         }
-      } catch (error) {
-        console.error('Failed to fetch products:', error);
+      } catch {
         toast.error('Failed to load products');
       } finally {
         setLoading(false);
@@ -215,7 +215,7 @@ export default function ShopPage() {
           onClick: () => router.push("/cart"),
         },
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to add to cart", {
         description: "Please try again",
       });
@@ -268,6 +268,17 @@ export default function ShopPage() {
     setOnSaleOnly(false);
     setSearchQuery("");
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading products...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

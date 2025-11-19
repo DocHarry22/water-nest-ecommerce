@@ -39,7 +39,6 @@ export default function CheckoutPage() {
   const { cart, clearCart, isLoading: cartLoading } = useCart();
   const [currentStep, setCurrentStep] = useState(1);
   const [orderNumber, setOrderNumber] = useState<string>("");
-  const [isProcessing, setIsProcessing] = useState(false);
   const [shippingInfo, setShippingInfo] = useState({
     firstName: "",
     lastName: "",

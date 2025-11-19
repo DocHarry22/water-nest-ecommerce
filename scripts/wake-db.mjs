@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,7 @@ async function wakeDatabase() {
       await prisma.$disconnect();
       return true;
       
-    } catch (error) {
+    } catch {
       const responseTime = Date.now() - startTime;
       console.log(`❌ Attempt ${attempt} failed after ${responseTime}ms`);
       

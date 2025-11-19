@@ -38,7 +38,7 @@ function ping() {
           if (response.database) {
             console.log(`🗄️  Database: Online`);
           }
-        } catch (e) {
+        } catch {
           console.log(`📄 Response received`);
         }
       } else {

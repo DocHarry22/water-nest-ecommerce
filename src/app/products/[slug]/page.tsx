@@ -248,7 +248,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           onClick: () => router.push("/cart"),
         },
       });
-    } catch (error) {
+    } catch {
       toast.error("Failed to add to cart", {
         description: "Please try again",
       });
