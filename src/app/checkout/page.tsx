@@ -54,6 +54,7 @@ export default function CheckoutPage() {
   });
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const cartItems = cart?.items || [];
   const subtotal = cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);

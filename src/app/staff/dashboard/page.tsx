@@ -14,7 +14,6 @@ import {
   TrendingUp,
   Clock,
   CheckCircle,
-  Wrench,
   Calendar,
   Eye,
   AlertCircle
@@ -39,21 +38,9 @@ interface Order {
   }[];
 }
 
-interface Appointment {
-  id: string;
-  type: string;
-  status: string;
-  date: string;
-  customer: {
-    name: string;
-    phone: string;
-  };
-}
-
 export default function StaffDashboardPage() {
   const { data: session, status } = useSession();
   const [orders, setOrders] = useState<Order[]>([]);
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     todayOrders: 0,
@@ -174,7 +161,7 @@ export default function StaffDashboardPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Today's Orders</p>
+                  <p className="text-sm font-medium text-gray-600">Today&apos;s Orders</p>
                   <p className="text-2xl font-bold text-gray-900">{stats.todayOrders}</p>
                 </div>
                 <ShoppingCart className="h-8 w-8 text-sky-600" />
@@ -198,7 +185,7 @@ export default function StaffDashboardPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Today's Appointments</p>
+                  <p className="text-sm font-medium text-gray-600">Today&apos;s Appointments</p>
                   <p className="text-2xl font-bold text-gray-900">{stats.todayAppointments}</p>
                 </div>
                 <Calendar className="h-8 w-8 text-green-600" />
@@ -363,7 +350,7 @@ export default function StaffDashboardPage() {
           <TabsContent value="tasks" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Today's Tasks</CardTitle>
+                <CardTitle>Today&apos;s Tasks</CardTitle>
                 <CardDescription>Your assigned tasks and priorities</CardDescription>
               </CardHeader>
               <CardContent>

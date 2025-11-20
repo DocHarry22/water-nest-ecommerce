@@ -389,6 +389,26 @@ model Address {
   @@map("addresses")
 }
 
+model AppointmentSlot {
+  id          String   @id @default(cuid())
+  date        DateTime // Date of the slot
+  startTime   String   // e.g., "09:00"
+  endTime     String   // e.g., "10:00"
+  isAvailable Boolean  @default(true)
+  maxBookings Int      @default(1) // How many appointments can be booked in this slot
+  bookedCount Int      @default(0)
+  
+  serviceTypes String[] // Which services this slot is for (empty = all services)
+  
+  createdBy   String   // Admin/Staff who created it
+  notes       String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("appointment_slots")
+}
+
 model Appointment {
   id        String            @id @default(cuid())
   userId    String?
