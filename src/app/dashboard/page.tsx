@@ -59,6 +59,16 @@ export default function DashboardPage() {
       redirect("/auth/login?callbackUrl=/dashboard");
     }
 
+    // Redirect staff to staff dashboard
+    if (session?.user?.role === "STAFF") {
+      redirect("/staff/dashboard");
+    }
+
+    // Redirect admin to admin dashboard
+    if (session?.user?.role === "ADMIN") {
+      redirect("/admin/dashboard");
+    }
+
     if (session?.user) {
       setProfileData({
         name: session.user.name || "",

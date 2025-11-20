@@ -90,14 +90,27 @@ export function Navbar() {
                         </Link>
                       )}
                       
-                      <Link 
-                        href="/dashboard" 
-                        onClick={() => setShowProfileMenu(false)}
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                      >
-                        <User className="h-4 w-4" />
-                        My Profile
-                      </Link>
+                      {session?.user?.role === "STAFF" && (
+                        <Link 
+                          href="/staff/dashboard" 
+                          onClick={() => setShowProfileMenu(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors font-medium"
+                        >
+                          <Package className="h-4 w-4" />
+                          Staff Dashboard
+                        </Link>
+                      )}
+                      
+                      {session?.user?.role === "CUSTOMER" && (
+                        <Link 
+                          href="/dashboard" 
+                          onClick={() => setShowProfileMenu(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                          <User className="h-4 w-4" />
+                          My Dashboard
+                        </Link>
+                      )}
                       
                       <Link 
                         href="/dashboard?tab=orders" 
