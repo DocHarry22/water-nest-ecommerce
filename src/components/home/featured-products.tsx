@@ -110,7 +110,7 @@ export function FeaturedProducts() {
               <Card key={product.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-sky-200 cursor-pointer transform hover:-translate-y-2">
                 <div className="relative h-56 md:h-64 overflow-hidden bg-linear-to-br from-sky-100 to-cyan-100">
                   <Image
-                    src={product.images?.[0] || `https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&q=80`}
+                    src={product.images?.[0] || `https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&q=80`}
                     alt={product.name}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"

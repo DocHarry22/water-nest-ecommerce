@@ -34,7 +34,7 @@ const serviceCategories = [
     color: "sky",
     tagline: "Professional installation by certified technicians",
     description: "Expert installation of all water treatment systems with full commissioning and testing",
-    image: "https://images.unsplash.com/photo-1581092918484-8313e1f6d145?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80",
     services: [
       {
         name: "Residential System Installation",
@@ -71,7 +71,7 @@ const serviceCategories = [
     color: "emerald",
     tagline: "Keep your systems running at peak performance",
     description: "Scheduled maintenance, filter replacements, and preventive servicing for all water treatment equipment",
-    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
     services: [
       {
         name: "Residential Maintenance Plans",
@@ -108,7 +108,7 @@ const serviceCategories = [
     color: "purple",
     tagline: "Comprehensive water analysis and reporting",
     description: "Accredited laboratory testing and on-site analysis for all water quality parameters",
-    image: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80",
     services: [
       {
         name: "Basic Water Quality Test",
@@ -145,7 +145,7 @@ const serviceCategories = [
     color: "cyan",
     tagline: "Complete borehole drilling and equipping",
     description: "Professional borehole drilling, pump installation, and groundwater treatment solutions",
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
     services: [
       {
         name: "Borehole Drilling",
@@ -182,7 +182,7 @@ const serviceCategories = [
     color: "teal",
     tagline: "Expert wastewater and effluent management",
     description: "Design, installation, and operation of wastewater treatment plants for compliance and environmental protection",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&q=80",
     services: [
       {
         name: "WWTP Design & Installation",
@@ -219,7 +219,7 @@ const serviceCategories = [
     color: "orange",
     tagline: "Expert advice and custom engineering solutions",
     description: "Professional water engineering consultation and treatment system design services",
-    image: "https://images.unsplash.com/photo-1582719201952-bba43c9c4e77?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=800&q=80",
     services: [
       {
         name: "Water Quality Assessment",

@@ -18,7 +18,7 @@ import {
 const featuredPost = {
   title: "The Complete Guide to Reverse Osmosis Systems in 2025",
   excerpt: "Everything you need to know about choosing, installing, and maintaining RO systems for your home or business.",
-  image: "https://images.unsplash.com/photo-1589931135738-14b4f5c3652c?w=800&q=80",
+  image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80",
   category: "Water Treatment",
   author: "Dr. Sarah Mitchell",
   date: "November 10, 2025",
@@ -30,7 +30,7 @@ const recentPosts = [
   {
     title: "5 Signs Your Water Softener Needs Maintenance",
     excerpt: "Learn the warning signs that indicate your water softener requires professional servicing.",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&q=80",
     category: "Maintenance",
     author: "Michael Johnson",
     date: "November 8, 2025",
@@ -40,7 +40,7 @@ const recentPosts = [
   {
     title: "Case Study: Industrial Wastewater Treatment in Durban",
     excerpt: "How we helped a manufacturing plant achieve 95% water recycling efficiency.",
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80",
     category: "Case Studies",
     author: "Linda Ndlovu",
     date: "November 5, 2025",
@@ -50,7 +50,7 @@ const recentPosts = [
   {
     title: "Understanding Water Quality Testing Standards in SA",
     excerpt: "A comprehensive overview of SANS 241 and other water quality regulations.",
-    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
     category: "Compliance",
     author: "Dr. Sarah Mitchell",
     date: "November 2, 2025",
@@ -60,7 +60,7 @@ const recentPosts = [
   {
     title: "Borehole Drilling: What Every Property Owner Should Know",
     excerpt: "Essential information about borehole drilling regulations, costs, and benefits in South Africa.",
-    image: "https://images.unsplash.com/photo-1504542132171-a86a3e5b0e6d?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=400&q=80",
     category: "Boreholes",
     author: "David van der Merwe",
     date: "October 28, 2025",
@@ -70,7 +70,7 @@ const recentPosts = [
   {
     title: "Water Conservation Tips for South African Businesses",
     excerpt: "Practical strategies to reduce water consumption and lower operational costs.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=400&q=80",
     category: "Conservation",
     author: "Linda Ndlovu",
     date: "October 25, 2025",
@@ -80,7 +80,7 @@ const recentPosts = [
   {
     title: "The ROI of Commercial Water Treatment Systems",
     excerpt: "Calculating the return on investment for business water treatment solutions.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
     category: "Business",
     author: "Michael Johnson",
     date: "October 22, 2025",

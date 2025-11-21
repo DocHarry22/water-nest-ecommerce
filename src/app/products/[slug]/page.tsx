@@ -51,9 +51,9 @@ const getProduct = (slug: string) => {
       rating: 4.8,
       reviews: 120,
       images: [
-        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80",
-        "https://images.unsplash.com/photo-1584622781867-f8178b0c2229?w=800&q=80",
-        "https://images.unsplash.com/photo-1582719366941-a26f6f69c9af?w=800&q=80"
+        "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80",
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
+        "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80"
       ],
       tags: ["bestseller", "home", "ro-system"],
       specifications: {
@@ -108,9 +108,9 @@ const getProduct = (slug: string) => {
       rating: 4.9,
       reviews: 34,
       images: [
-        "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80",
-        "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80",
-        "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80"
+        "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&q=80",
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
+        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80"
       ],
       tags: ["industrial", "portable", "rental"],
       specifications: {
@@ -165,9 +165,9 @@ const getProduct = (slug: string) => {
       rating: 4.7,
       reviews: 67,
       images: [
-        "https://images.unsplash.com/photo-1582719366941-a26f6f69c9af?w=800&q=80",
-        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80",
-        "https://images.unsplash.com/photo-1584622781867-f8178b0c2229?w=800&q=80"
+        "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80",
+        "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80",
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80"
       ],
       tags: ["industrial", "softener", "commercial"],
       specifications: {

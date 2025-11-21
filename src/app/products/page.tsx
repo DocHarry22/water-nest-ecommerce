@@ -32,7 +32,7 @@ const productCategories = [
     icon: Droplet,
     color: "sky",
     description: "Comprehensive filtration solutions for removing sediment, chlorine, and impurities",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80",
     applications: ["Residential homes", "Apartments", "Small offices", "Retail spaces"],
     products: [
       {
@@ -63,7 +63,7 @@ const productCategories = [
     icon: FlaskConical,
     color: "cyan",
     description: "Advanced purification technologies including RO, UV, and ultrafiltration",
-    image: "https://images.unsplash.com/photo-1582719366941-a26f6f69c9af?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80",
     applications: ["Healthcare facilities", "Laboratories", "Commercial kitchens", "Pharmaceutical"],
     products: [
       {
@@ -94,7 +94,7 @@ const productCategories = [
     icon: Settings,
     color: "teal",
     description: "Containerized mobile water treatment solutions for rapid deployment",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=800&q=80",
     applications: ["Construction sites", "Emergency relief", "Events & festivals", "Mining camps"],
     products: [
       {
@@ -125,7 +125,7 @@ const productCategories = [
     icon: Wrench,
     color: "purple",
     description: "Industrial water treatment equipment and specialized applications",
-    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
     applications: ["Manufacturing", "Food & beverage", "Hospitality", "Agriculture"],
     products: [
       {
@@ -162,7 +162,7 @@ const productCategories = [
     icon: Factory,
     color: "orange",
     description: "Large-scale treatment systems for industrial and municipal applications",
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
     applications: ["Municipalities", "Factories", "Power plants", "Wastewater treatment"],
     products: [
       {
@@ -193,7 +193,7 @@ const productCategories = [
     icon: FlaskConical,
     color: "emerald",
     description: "Water quality testing equipment and maintenance supplies",
-    image: "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80",
     applications: ["All water systems", "Quality control", "Compliance monitoring"],
     products: [
       {

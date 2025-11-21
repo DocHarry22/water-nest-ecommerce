@@ -291,7 +291,7 @@ export default function Home() {
             <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-300 cursor-pointer transform hover:-translate-y-2">
               <div className="relative h-64 md:h-72 lg:h-80 overflow-hidden bg-linear-to-br from-blue-100 to-cyan-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80"
+                  src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80"
                   alt="Borehole drilling services in South Africa"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -429,7 +429,7 @@ export default function Home() {
             <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-emerald-300 cursor-pointer transform hover:-translate-y-2">
               <div className="relative h-64 md:h-72 lg:h-80 overflow-hidden bg-linear-to-br from-emerald-100 to-green-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1581092918484-8313e1f6d145?w=800&q=80"
+                  src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80"
                   alt="Wastewater treatment plant operations and maintenance"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -550,14 +550,14 @@ export default function Home() {
               {
                 title: "Borehole Drilling & Development",
                 description: "Professional borehole drilling services - site surveys, drilling, casing, pump installation. Water security for your property!",
-                image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80",
+                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80",
                 icon: <Waves className="h-6 w-6" />,
                 badge: "Sustainable water source"
               },
               {
                 title: "Wastewater Treatment Plant Operations",
                 description: "Full audit, operations & maintenance of WWTP. Compliance monitoring, process optimization, sludge management - we keep it running!",
-                image: "https://images.unsplash.com/photo-1581092918484-8313e1f6d145?w=800&q=80",
+                image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&q=80",
                 icon: <FlaskConical className="h-6 w-6" />,
                 badge: "Municipal & Industrial"
               },
@@ -762,7 +762,7 @@ export default function Home() {
               {
                 title: "Water Quality in SA: What You Need to Know",
                 excerpt: "Understanding TDS levels, chlorine content and how to test your municipal water supply...",
-                image: "https://images.unsplash.com/photo-1610724404688-b72f3cb5b6b8?w=400&q=80",
+                image: "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&q=80",
                 date: "Nov 10, 2025",
                 readTime: "5 min read",
                 category: "Water Quality"
@@ -770,7 +770,7 @@ export default function Home() {
               {
                 title: "RO vs UV: Which System Do You Really Need?",
                 excerpt: "Comparing reverse osmosis and ultraviolet purification - pros, cons, and cost analysis...",
-                image: "https://images.unsplash.com/photo-1582719201952-9c8d7cf5e5f1?w=400&q=80",
+                image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
                 date: "Nov 8, 2025",
                 readTime: "7 min read",
                 category: "Guides"
@@ -778,7 +778,7 @@ export default function Home() {
               {
                 title: "DIY Maintenance Tips for Your Water Softener",
                 excerpt: "Simple maintenance tasks you can do yourself to keep your system running smoothly...",
-                image: "https://images.unsplash.com/photo-1584622781867-f8178b0c2229?w=400&q=80",
+                image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=80",
                 date: "Nov 5, 2025",
                 readTime: "4 min read",
                 category: "Maintenance"
