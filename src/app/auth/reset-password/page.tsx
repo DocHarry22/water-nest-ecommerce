@@ -45,11 +45,31 @@ function ResetPasswordForm() {
       return;
     }
 
-    // Simulate password reset
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const response = await fetch("/api/auth/forgot-password", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Failed to reset password");
+        setLoading(false);
+        return;
+      }
+
       setSuccess(true);
-    }, 1500);
+    } catch (error) {
+      console.error("Reset password error:", error);
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (success) {

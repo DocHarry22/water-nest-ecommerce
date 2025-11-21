@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,9 @@ import {
   Trash2,
   CheckCircle,
   XCircle
-} from "lucide-react";interface AppointmentSlot {
+} from "lucide-react";
+
+interface AppointmentSlot {
   id: string;
   date: string;
   startTime: string;
@@ -27,8 +29,16 @@ import {
   notes?: string;
 }
 
+const formatLocalDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 export default function AppointmentSlotsPage() {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const [slots, setSlots] = useState<AppointmentSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -43,29 +53,30 @@ export default function AppointmentSlotsPage() {
   });
 
   const serviceOptions = [
-    "Installation",
-    "Maintenance",
-    "Repair",
-    "Water Testing",
-    "Consultation",
+    { value: "installation", label: "Installation" },
+    { value: "maintenance", label: "Maintenance" },
+    { value: "repair", label: "Repair" },
+    { value: "water-testing", label: "Water Testing" },
+    { value: "consultation", label: "Consultation" },
   ];
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      redirect("/auth/login");
+      router.replace("/auth/login");
     }
 
     if (session?.user && (session.user.role === "ADMIN" || session.user.role === "STAFF")) {
       loadSlots();
     } else if (session?.user) {
-      redirect("/dashboard");
+      router.replace("/dashboard");
     }
-  }, [session, status]);
+  }, [session, status, router]);
 
   const loadSlots = async () => {
     try {
-      const startDate = new Date().toISOString().split('T')[0];
-      const endDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]; // 90 days ahead
+      const today = new Date();
+      const startDate = formatLocalDate(today);
+      const endDate = formatLocalDate(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)); // 90 days ahead
       
       const response = await fetch(`/api/appointments/slots?startDate=${startDate}&endDate=${endDate}`);
       
@@ -266,7 +277,7 @@ export default function AppointmentSlotsPage() {
                     <Input
                       id="date"
                       type="date"
-                      min={new Date().toISOString().split('T')[0]}
+                      min={formatLocalDate(new Date())}
                       value={formData.date}
                       onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                       required
@@ -302,7 +313,7 @@ export default function AppointmentSlotsPage() {
                     id="maxBookings"
                     type="number"
                     min="1"
-                    max="10"
+                    max="20"
                     value={formData.maxBookings}
                     onChange={(e) => setFormData({ ...formData, maxBookings: parseInt(e.target.value) })}
                     required
@@ -317,12 +328,12 @@ export default function AppointmentSlotsPage() {
                   <div className="flex flex-wrap gap-2 mt-2">
                     {serviceOptions.map(service => (
                       <Badge
-                        key={service}
-                        variant={formData.serviceTypes.includes(service) ? "default" : "outline"}
+                        key={service.value}
+                        variant={formData.serviceTypes.includes(service.value) ? "default" : "outline"}
                         className="cursor-pointer"
-                        onClick={() => toggleServiceType(service)}
+                        onClick={() => toggleServiceType(service.value)}
                       >
-                        {service}
+                        {service.label}
                       </Badge>
                     ))}
                   </div>
@@ -406,7 +417,7 @@ export default function AppointmentSlotsPage() {
                                   <div className="flex flex-wrap gap-1">
                                     {slot.serviceTypes.map(service => (
                                       <Badge key={service} variant="outline" className="text-xs">
-                                        {service}
+                                        {serviceOptions.find(s => s.value === service)?.label ?? service}
                                       </Badge>
                                     ))}
                                   </div>

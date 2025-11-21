@@ -106,6 +106,17 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  
+  // Device & security tracking
+  ipAddress    String?
+  userAgent    String?
+  device       String?  // Mobile, Desktop, Tablet
+  browser      String?  // Chrome, Firefox, Safari, etc.
+  os           String?  // Windows, macOS, Linux, iOS, Android
+  country      String?
+  city         String?
+  lastActive   DateTime @default(now())
+  
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")

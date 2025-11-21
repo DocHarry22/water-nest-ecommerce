@@ -22,17 +22,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: true,
+      // Disabled dangerous linking - users must explicitly link accounts
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID!,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: true,
+      // Disabled dangerous linking - users must explicitly link accounts
     }),
     MicrosoftEntraIDProvider({
       clientId: process.env.MICROSOFT_CLIENT_ID!,
       clientSecret: process.env.MICROSOFT_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: true,
+      // Disabled dangerous linking - users must explicitly link accounts
     }),
     CredentialsProvider({
       name: "credentials",
@@ -54,6 +54,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!user || !user.password) {
           return null;
         }
+
+        // Check if email is verified (will be enforced after implementing email verification)
+        // if (!user.emailVerified) {
+        //   throw new Error("Please verify your email before logging in");
+        // }
 
         const isPasswordValid = await compare(
           credentials.password as string,

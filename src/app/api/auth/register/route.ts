@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hash } from "bcryptjs";
 import { z } from "zod";
+import { rateLimit, getClientIdentifier, getRateLimitHeaders } from "@/lib/rate-limit";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -13,6 +14,23 @@ const registerSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Apply rate limiting - 3 registrations per hour per IP
+    const identifier = getClientIdentifier(request);
+    const rateLimitResult = await rateLimit(identifier, 'register');
+    
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          error: "Too many registration attempts",
+          message: `Please try again after ${new Date(rateLimitResult.reset).toLocaleTimeString()}`,
+        },
+        {
+          status: 429,
+          headers: getRateLimitHeaders(rateLimitResult),
+        }
+      );
+    }
+    
     const body = await request.json();
     
     // Validate input
