@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
-// Lightweight middleware - auth checks moved to individual page components and API routes
+// Lightweight proxy - auth checks moved to individual page components and API routes
 // This avoids bundling large auth dependencies into the Edge Function
 
-export async function middleware() {
+export async function proxy() {
   // Add security headers to all responses
   const response = NextResponse.next();
   
