@@ -287,7 +287,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Image Gallery */}
             <div className="space-y-4">
-              <div className="relative aspect-square rounded-lg overflow-hidden bg-linear-to-br from-sky-100 to-cyan-100 border-2 border-gray-200">
+              <div className="relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-sky-100 to-cyan-100 border-2 border-gray-200">
                 <Image
                   src={product.images[selectedImage]}
                   alt={product.name}
