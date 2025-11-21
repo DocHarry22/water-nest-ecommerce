@@ -1,43 +1,46 @@
 # Vercel Environment Variables Setup
 
 ## 🔗 Add these at:
-https://vercel.com/docharry22s-projects/water-nest-ecommerce/settings/environment-variables
+Vercel Dashboard → Your Project → Settings → Environment Variables
 
 ---
 
 ## ✅ Required Environment Variables
 
-### Database (Required)
+### Database (Production Only)
 ```
 DATABASE_URL
-postgresql://postgres.rgfloeshqjbjfdarwdxn:TNTfgZyrdvx1CTqu@aws-0-eu-west-1.pooler.supabase.com:5432/postgres?pgbouncer=true&connection_limit=10&pool_timeout=20
+postgresql://postgres.<PROJECT_ID>:<DB_PASSWORD>@aws-0-eu-west-1.pooler.supabase.com:5432/postgres?pgbouncer=true&connection_limit=10&pool_timeout=20
 ```
 
 ```
 DIRECT_URL
-postgresql://postgres:TNTfgZyrdvx1CTqu@db.rgfloeshqjbjfdarwdxn.supabase.co:5432/postgres
+postgresql://postgres:<DB_PASSWORD>@db.<PROJECT_ID>.supabase.co:5432/postgres
 ```
 
-### NextAuth.js (Required)
+**Note:** Get your database credentials from Supabase Dashboard → Settings → Database
+
+### NextAuth.js (All Environments)
 ```
 NEXTAUTH_URL
-https://water-nest-ecommerce-bvgyo01xz-docharry22s-projects.vercel.app
+<YOUR_VERCEL_DEPLOYMENT_URL>
 ```
 
 ```
 NEXTAUTH_SECRET
-development-secret-change-in-production
+<GENERATE_SECURE_SECRET>
 ```
 
-**⚠️ IMPORTANT:** Generate a new secure secret for production:
-Run: `openssl rand -base64 32` and use that value instead
+**⚠️ IMPORTANT:** Generate a new secure secret:
+- PowerShell: `$bytes = New-Object byte[] 32; [Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($bytes); [Convert]::ToBase64String($bytes)`
+- Linux/Mac: `openssl rand -base64 32`
 
 ---
 
-## 📱 App Configuration
+## 📱 App Configuration (All Environments)
 ```
 NEXT_PUBLIC_APP_URL
-https://water-nest-ecommerce-bvgyo01xz-docharry22s-projects.vercel.app
+<YOUR_VERCEL_DEPLOYMENT_URL>
 ```
 
 ```
@@ -158,12 +161,12 @@ Or trigger a redeploy from Vercel Dashboard
 Once deployed with env vars, create admin account:
 
 **Option A: Via Registration Page**
-1. Go to: https://water-nest-ecommerce-bvgyo01xz-docharry22s-projects.vercel.app/auth/register
+1. Go to: `<YOUR_VERCEL_URL>/auth/register`
 2. Register with email: admin@waternest.com
 3. Manually update role in Supabase dashboard to 'ADMIN'
 
 **Option B: Via Supabase Dashboard**
-1. Go to: https://supabase.com/dashboard/project/rgfloeshqjbjfdarwdxn
+1. Go to: Supabase Dashboard → Table Editor → User table
 2. Table Editor → User table
 3. Insert row with:
    - email: admin@waternest.com
@@ -192,24 +195,24 @@ Once deployed with env vars, create admin account:
 ## 🚀 Quick Copy-Paste Format (for Vercel UI)
 
 **Name:** DATABASE_URL  
-**Value:** `postgresql://postgres.rgfloeshqjbjfdarwdxn:TNTfgZyrdvx1CTqu@aws-0-eu-west-1.pooler.supabase.com:5432/postgres?pgbouncer=true&connection_limit=10&pool_timeout=20`  
+**Value:** `<GET_FROM_SUPABASE_DASHBOARD>`  
 **Environment:** Production
 
 **Name:** DIRECT_URL  
-**Value:** `postgresql://postgres:TNTfgZyrdvx1CTqu@db.rgfloeshqjbjfdarwdxn.supabase.co:5432/postgres`  
+**Value:** `<GET_FROM_SUPABASE_DASHBOARD>`  
 **Environment:** Production
 
 **Name:** NEXTAUTH_URL  
-**Value:** `https://water-nest-ecommerce-bvgyo01xz-docharry22s-projects.vercel.app`  
-**Environment:** Production
+**Value:** `<YOUR_VERCEL_URL>`  
+**Environment:** Production, Preview, Development
 
 **Name:** NEXTAUTH_SECRET  
-**Value:** `[GENERATE NEW SECRET - see security notes above]`  
-**Environment:** Production
+**Value:** `<GENERATE_NEW_SECRET>`  
+**Environment:** Production, Preview, Development
 
 **Name:** NEXT_PUBLIC_APP_URL  
-**Value:** `https://water-nest-ecommerce-bvgyo01xz-docharry22s-projects.vercel.app`  
-**Environment:** Production
+**Value:** `<YOUR_VERCEL_URL>`  
+**Environment:** Production, Preview, Development
 
 **Name:** NEXT_PUBLIC_APP_NAME  
 **Value:** `Water Nest`  
@@ -225,6 +228,5 @@ If you encounter issues:
 3. Verify all required env vars are set
 4. Make sure to redeploy after adding env vars
 
-**Your site URL:** https://water-nest-ecommerce-bvgyo01xz-docharry22s-projects.vercel.app
-**Vercel Dashboard:** https://vercel.com/docharry22s-projects/water-nest-ecommerce
-**Supabase Dashboard:** https://supabase.com/dashboard/project/rgfloeshqjbjfdarwdxn
+**Vercel Dashboard:** https://vercel.com (Your Projects → water-nest-ecommerce)
+**Supabase Dashboard:** https://supabase.com/dashboard (Your Project → Settings → Database)
