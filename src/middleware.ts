@@ -1,71 +1,18 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { auth } from "@/lib/auth";
 
-// Define protected routes and their required roles
-const protectedRoutes = {
-  admin: {
-    paths: ["/admin"],
-    roles: ["ADMIN"],
-  },
-  staff: {
-    paths: ["/staff"],
-    roles: ["ADMIN", "STAFF"],
-  },
-  customer: {
-    paths: ["/dashboard", "/orders", "/profile"],
-    roles: ["CUSTOMER", "ADMIN", "STAFF"],
-  },
-};
+// Lightweight middleware - auth checks moved to individual page components and API routes
+// This avoids bundling large auth dependencies into the Edge Function
 
-export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-
-  // Skip middleware for public routes
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api/auth") ||
-    pathname.startsWith("/auth") ||
-    pathname === "/" ||
-    pathname.startsWith("/products") ||
-    pathname.startsWith("/services") ||
-    pathname.startsWith("/about") ||
-    pathname.startsWith("/contact") ||
-    pathname.startsWith("/shop") ||
-    pathname.startsWith("/cart") ||
-    pathname.startsWith("/blog")
-  ) {
-    return NextResponse.next();
-  }
-
-  // Get session
-  const session = await auth();
-
-  // Check if user is authenticated
-  if (!session?.user) {
-    const signInUrl = new URL("/auth/login", request.url);
-    signInUrl.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(signInUrl);
-  }
-
-  // Check role-based access
-  for (const config of Object.values(protectedRoutes)) {
-    if (config.paths.some(path => pathname.startsWith(path))) {
-      if (!config.roles.includes(session.user.role)) {
-        // Redirect to appropriate dashboard based on role
-        const redirectUrl = new URL(
-          session.user.role === "ADMIN" ? "/admin" :
-          session.user.role === "STAFF" ? "/staff/dashboard" :
-          "/dashboard",
-          request.url
-        );
-        return NextResponse.redirect(redirectUrl);
-      }
-      break;
-    }
-  }
-
-  return NextResponse.next();
+export async function middleware() {
+  // Add security headers to all responses
+  const response = NextResponse.next();
+  
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('X-XSS-Protection', '1; mode=block');
+  
+  return response;
 }
 
 export const config = {
