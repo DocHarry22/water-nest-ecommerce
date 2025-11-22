@@ -12,6 +12,7 @@ export function Navbar() {
   const { data: session, status } = useSession();
   const { itemCount } = useCart();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -162,12 +163,119 @@ export function Navbar() {
               </Button>
             </Link>
 
-            {/* Mobile Menu */}
-            <Button variant="ghost" size="icon" className="md:hidden">
+            {/* Mobile Menu Button */}
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="md:hidden"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              aria-label="Menu"
+            >
               <Menu className="h-5 w-5" />
             </Button>
           </div>
         </div>
+
+        {/* Mobile Menu Drawer */}
+        {showMobileMenu && (
+          <div className="md:hidden border-t border-gray-200 bg-white">
+            <nav className="container mx-auto px-4 py-4 space-y-2">
+              {navConfig.mainNav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600 rounded-lg transition-colors"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  {item.title}
+                </Link>
+              ))}
+              
+              {/* Mobile Auth Links */}
+              <div className="border-t border-gray-200 pt-4 mt-4">
+                {status === "authenticated" ? (
+                  <>
+                    <div className="px-4 py-2 mb-2">
+                      <p className="text-sm font-medium text-gray-900">{session?.user?.name || "User"}</p>
+                      <p className="text-xs text-gray-600">{session?.user?.email}</p>
+                    </div>
+                    
+                    {session?.user?.role === "ADMIN" && (
+                      <Link 
+                        href="/admin" 
+                        onClick={() => setShowMobileMenu(false)}
+                        className="flex items-center gap-3 px-4 py-3 text-base font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors"
+                      >
+                        <Settings className="h-5 w-5" />
+                        Admin Dashboard
+                      </Link>
+                    )}
+                    
+                    {session?.user?.role === "STAFF" && (
+                      <Link 
+                        href="/staff/dashboard" 
+                        onClick={() => setShowMobileMenu(false)}
+                        className="flex items-center gap-3 px-4 py-3 text-base font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                      >
+                        <Package className="h-5 w-5" />
+                        Staff Dashboard
+                      </Link>
+                    )}
+                    
+                    {session?.user?.role === "CUSTOMER" && (
+                      <Link 
+                        href="/dashboard" 
+                        onClick={() => setShowMobileMenu(false)}
+                        className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                      >
+                        <User className="h-5 w-5" />
+                        My Dashboard
+                      </Link>
+                    )}
+                    
+                    <Link 
+                      href="/dashboard?tab=orders" 
+                      onClick={() => setShowMobileMenu(false)}
+                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      <Package className="h-5 w-5" />
+                      My Orders
+                    </Link>
+                    
+                    <Link 
+                      href="/dashboard?tab=settings" 
+                      onClick={() => setShowMobileMenu(false)}
+                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                    >
+                      <Settings className="h-5 w-5" />
+                      Settings
+                    </Link>
+                    
+                    <button 
+                      onClick={() => {
+                        setShowMobileMenu(false);
+                        handleSignOut();
+                      }}
+                      className="flex items-center gap-3 px-4 py-3 text-base font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full mt-2"
+                    >
+                      <LogOut className="h-5 w-5" />
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <Link 
+                    href="/auth/login" 
+                    onClick={() => setShowMobileMenu(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  >
+                    <User className="h-5 w-5" />
+                    Sign In
+                  </Link>
+                )}
+              </div>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
