@@ -14,6 +14,14 @@ export async function GET() {
       );
     }
 
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const sessions = await prisma.session.findMany({
       where: {
         userId: session.user.id,
@@ -59,6 +67,14 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
+      );
+    }
+
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 
