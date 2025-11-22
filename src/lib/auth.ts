@@ -9,7 +9,8 @@ import { compare } from "bcryptjs";
 import type { Adapter } from "next-auth/adapters";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma) as Adapter,
+  // Only use adapter if prisma is available (may be undefined during build)
+  ...(prisma ? { adapter: PrismaAdapter(prisma) as Adapter } : {}),
   session: {
     strategy: "jwt",
   },
@@ -42,6 +43,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        // Check if prisma is available (may be undefined during build)
+        if (!prisma) {
+          console.warn("Auth: Database unavailable during build");
           return null;
         }
 

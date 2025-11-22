@@ -4,6 +4,14 @@ import { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "12");

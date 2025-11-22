@@ -14,6 +14,14 @@ const registerSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     // Apply rate limiting - 3 registrations per hour per IP
     const identifier = getClientIdentifier(request);
     const rateLimitResult = await rateLimit(identifier, 'register');

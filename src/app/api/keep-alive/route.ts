@@ -6,6 +6,18 @@ export const revalidate = 0;
 
 export async function GET() {
   try {
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        {
+          status: "unavailable",
+          message: "Database client not initialized (build-time)",
+          timestamp: new Date().toISOString(),
+        },
+        { status: 503 }
+      );
+    }
+
     // Simple query to keep database awake
     const result = await prisma.$queryRaw`SELECT 1 as ping, NOW() as timestamp`;
     
