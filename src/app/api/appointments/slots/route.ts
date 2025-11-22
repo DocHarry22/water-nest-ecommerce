@@ -76,6 +76,13 @@ export async function GET(request: NextRequest) {
       ].filter(Boolean) as Prisma.AppointmentSlotWhereInput["OR"];
     }
 
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const slots = await prisma.appointmentSlot.findMany({
       where,
       orderBy: [
@@ -106,6 +113,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Unauthorized - Admin or Staff access required" },
         { status: 403 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 
@@ -231,6 +245,13 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json(
         { error: "Unauthorized - Admin or Staff access required" },
         { status: 403 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 
