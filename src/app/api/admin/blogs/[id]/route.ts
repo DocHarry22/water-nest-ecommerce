@@ -26,6 +26,14 @@ export async function PUT(
       );
     }
 
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const { id } = await params;
     const blogId = id;
 
@@ -65,6 +73,14 @@ export async function DELETE(
       return NextResponse.json(
         { error: "Unauthorized. Admin or Staff access required." },
         { status: 403 }
+      );
+    }
+
+    // Check if prisma is available (may be undefined during build)
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 
