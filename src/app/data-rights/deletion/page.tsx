@@ -50,7 +50,7 @@ export default function DeletionRequestPage() {
       } else {
         toast.error("Failed to submit request. Please try again.");
       }
-    } catch (error) {
+    } catch {
       toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
@@ -79,7 +79,7 @@ export default function DeletionRequestPage() {
 
         <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded mb-8">
           <div className="flex items-start">
-            <AlertTriangle className="h-5 w-5 text-red-600 mr-3 mt-0.5 flex-shrink-0" />
+            <AlertTriangle className="h-5 w-5 text-red-600 mr-3 mt-0.5 shrink-0" />
             <div className="text-sm text-gray-700">
               <strong className="block mb-2">Important Information:</strong>
               <ul className="space-y-1 list-disc list-inside">

@@ -44,7 +44,7 @@ export default function AccessRequestPage() {
       } else {
         toast.error("Failed to submit request. Please try again.");
       }
-    } catch (error) {
+    } catch {
       toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
