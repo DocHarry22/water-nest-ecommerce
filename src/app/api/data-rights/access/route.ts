@@ -17,7 +17,6 @@ export async function POST(request: Request) {
     const { fullName, email, phone, accountEmail, idNumber, additionalInfo } = body;
 
     // Create data rights request in database
-    // @ts-expect-error - Prisma client regenerated, TypeScript server needs reload
     const dataRequest = await prisma.dataRightsRequest.create({
       data: {
         type: "ACCESS",
