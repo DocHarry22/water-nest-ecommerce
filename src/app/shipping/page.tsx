@@ -8,8 +8,9 @@ export const metadata: Metadata = {
 
 export default function ShippingPage() {
   return (
+    <div className="min-h-screen bg-white text-gray-900">
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <h1 className="text-4xl font-bold mb-4">Shipping Information</h1>
+      <h1 className="text-4xl font-bold mb-4 text-gray-900">Shipping Information</h1>
       <p className="text-gray-600 mb-8">
         Everything you need to know about delivery areas, shipping methods, and order tracking.
       </p>
@@ -147,6 +148,7 @@ export default function ShippingPage() {
           <p><strong>What to do:</strong> Contact the courier directly using your tracking number or reach out to us for assistance.</p>
         </div>
       </section>
+    </div>
     </div>
   );
 }

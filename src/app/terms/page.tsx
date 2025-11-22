@@ -8,8 +8,9 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
+    <div className="min-h-screen bg-white text-gray-900">
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <h1 className="text-4xl font-bold mb-4">Terms of Service</h1>
+      <h1 className="text-4xl font-bold mb-4 text-gray-900">Terms of Service</h1>
       <p className="text-gray-600 mb-2">
         <em>Last Updated: November 22, 2025</em>
       </p>
@@ -297,6 +298,7 @@ export default function TermsPage() {
           <strong>Legal Notice:</strong> These terms are legally binding. By using our services, you acknowledge that you have read, understood, and agree to be bound by these terms. If you have questions about these terms, please contact our legal department at legal@waternest.co.za.
         </p>
       </section>
+    </div>
     </div>
   );
 }

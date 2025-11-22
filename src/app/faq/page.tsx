@@ -13,8 +13,9 @@ export const metadata: Metadata = {
 
 export default function FAQPage() {
   return (
+    <div className="min-h-screen bg-white text-gray-900">
     <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
+      <h1 className="text-4xl font-bold mb-4 text-gray-900">Frequently Asked Questions</h1>
       <p className="text-gray-600 mb-8">
         Find answers to common questions about Water Nest products, services, and policies.
       </p>
@@ -139,6 +140,7 @@ export default function FAQPage() {
           </div>
         </section>
       </div>
+    </div>
     </div>
   );
 }

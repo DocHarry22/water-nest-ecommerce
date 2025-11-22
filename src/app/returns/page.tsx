@@ -8,8 +8,9 @@ export const metadata: Metadata = {
 
 export default function ReturnsPage() {
   return (
+    <div className="min-h-screen bg-white text-gray-900">
     <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <h1 className="text-4xl font-bold mb-4">Returns Policy</h1>
+      <h1 className="text-4xl font-bold mb-4 text-gray-900">Returns Policy</h1>
       <p className="text-gray-600 mb-2">
         <em>In compliance with the Consumer Protection Act 68 of 2008</em>
       </p>
@@ -220,6 +221,7 @@ export default function ReturnsPage() {
           </div>
         </div>
       </section>
+    </div>
     </div>
   );
 }
