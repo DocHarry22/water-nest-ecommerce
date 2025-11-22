@@ -164,37 +164,51 @@ export default function PrivacyPage() {
           Your Rights Under POPIA
         </h2>
         <div className="bg-white rounded-lg shadow-md p-6">
-          <p className="mb-4">You have the right to:</p>
-          <div className="grid md:grid-cols-2 gap-4">
+          <p className="mb-6 text-gray-700">You have the right to:</p>
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            {/* Access */}
             <div>
-              <h4 className="font-semibold mb-2">Access</h4>
-              <p className="text-sm">Request a copy of your personal information</p>
+              <h4 className="font-bold text-lg mb-2 text-gray-900">Access</h4>
+              <p className="text-sm text-gray-600">Request a copy of your personal information</p>
             </div>
+            
+            {/* Correction */}
             <div>
-              <h4 className="font-semibold mb-2">Correction</h4>
-              <p className="text-sm">Request correction of inaccurate information</p>
+              <h4 className="font-bold text-lg mb-2 text-gray-900">Correction</h4>
+              <p className="text-sm text-gray-600">Request correction of inaccurate information</p>
             </div>
+            
+            {/* Deletion */}
             <div>
-              <h4 className="font-semibold mb-2">Deletion</h4>
-              <p className="text-sm">Request deletion of your information (subject to legal requirements)</p>
+              <h4 className="font-bold text-lg mb-2 text-gray-900">Deletion</h4>
+              <p className="text-sm text-gray-600">Request deletion of your information (subject to legal requirements)</p>
             </div>
+            
+            {/* Objection */}
             <div>
-              <h4 className="font-semibold mb-2">Objection</h4>
-              <p className="text-sm">Object to processing for direct marketing</p>
+              <h4 className="font-bold text-lg mb-2 text-gray-900">Objection</h4>
+              <p className="text-sm text-gray-600">Object to processing for direct marketing</p>
             </div>
+            
+            {/* Restriction */}
             <div>
-              <h4 className="font-semibold mb-2">Restriction</h4>
-              <p className="text-sm">Request limitation on how we use your data</p>
+              <h4 className="font-bold text-lg mb-2 text-gray-900">Restriction</h4>
+              <p className="text-sm text-gray-600">Request limitation on how we use your data</p>
             </div>
+            
+            {/* Data Portability */}
             <div>
-              <h4 className="font-semibold mb-2">Data Portability</h4>
-              <p className="text-sm">Receive your data in a structured format</p>
+              <h4 className="font-bold text-lg mb-2 text-gray-900">Data Portability</h4>
+              <p className="text-sm text-gray-600">Receive your data in a structured format</p>
             </div>
           </div>
-          <div className="mt-6 bg-blue-50 p-4 rounded">
-            <p className="font-semibold mb-2">To exercise these rights, contact our Information Officer:</p>
-            <p className="text-sm">Email: privacy@waternest.co.za</p>
-            <p className="text-sm">Phone: 082 XXX XXXX</p>
+          
+          <div className="mt-6 bg-blue-50 p-5 rounded-lg border-l-4 border-blue-600">
+            <p className="font-semibold mb-3 text-gray-900">To exercise these rights, contact our Information Officer:</p>
+            <div className="space-y-1">
+              <p className="text-sm text-gray-700"><span className="font-medium">Email:</span> privacy@waternest.co.za</p>
+              <p className="text-sm text-gray-700"><span className="font-medium">Phone:</span> 082 XXX XXXX</p>
+            </div>
           </div>
         </div>
       </section>
