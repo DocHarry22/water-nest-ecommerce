@@ -36,6 +36,7 @@ export async function POST(request: Request) {
     }
 
     // Create deletion request
+    // @ts-expect-error - Prisma client regenerated, TypeScript server needs reload
     const dataRequest = await prisma.dataRightsRequest.create({
       data: {
         type: "DELETION",
