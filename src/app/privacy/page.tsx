@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -204,10 +205,18 @@ export default function PrivacyPage() {
           </div>
           
           <div className="mt-6 bg-blue-50 p-5 rounded-lg border-l-4 border-blue-600">
-            <p className="font-semibold mb-3 text-gray-900">To exercise these rights, contact our Information Officer:</p>
-            <div className="space-y-1">
-              <p className="text-sm text-gray-700"><span className="font-medium">Email:</span> privacy@waternest.co.za</p>
-              <p className="text-sm text-gray-700"><span className="font-medium">Phone:</span> 082 XXX XXXX</p>
+            <p className="font-semibold mb-3 text-gray-900">To exercise these rights:</p>
+            <div className="space-y-3">
+              <div>
+                <Link href="/data-rights" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                  Submit Data Rights Request
+                </Link>
+              </div>
+              <div className="border-t border-blue-200 pt-3">
+                <p className="text-sm font-medium text-gray-900 mb-1">Or contact our Information Officer:</p>
+                <p className="text-sm text-gray-700"><span className="font-medium">Email:</span> privacy@waternest.co.za</p>
+                <p className="text-sm text-gray-700"><span className="font-medium">Phone:</span> 082 XXX XXXX</p>
+              </div>
             </div>
           </div>
         </div>

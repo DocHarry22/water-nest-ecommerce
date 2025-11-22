@@ -563,3 +563,52 @@ model WaterAssessment {
 
   @@map("water_assessments")
 }
+
+enum DataRightsRequestType {
+  ACCESS
+  CORRECTION
+  DELETION
+  OBJECTION
+  RESTRICTION
+  PORTABILITY
+}
+
+enum DataRightsRequestStatus {
+  PENDING
+  IN_REVIEW
+  APPROVED
+  COMPLETED
+  REJECTED
+  CANCELLED
+}
+
+model DataRightsRequest {
+  id            String                   @id @default(cuid())
+  type          DataRightsRequestType
+  status        DataRightsRequestStatus  @default(PENDING)
+  
+  // Requester information
+  fullName      String
+  email         String
+  phone         String?
+  accountEmail  String?
+  idNumber      String                   // Last 4 digits for verification
+  
+  // Request details
+  additionalInfo String?                 @db.Text
+  reason         String?                 @db.Text
+  
+  // Admin processing
+  processedBy    String?
+  processedAt    DateTime?
+  adminNotes     String?                 @db.Text
+  completionNotes String?                @db.Text
+  
+  // File attachments
+  reportUrl      String?                 // For access requests - link to data report
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("data_rights_requests")
+}
