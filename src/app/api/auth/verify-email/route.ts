@@ -31,6 +31,13 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const validatedData = sendVerificationSchema.parse(body);
 
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     // Find user
     const user = await prisma.user.findUnique({
       where: { email: validatedData.email },
@@ -112,6 +119,13 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         { error: "Verification token is required" },
         { status: 400 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 

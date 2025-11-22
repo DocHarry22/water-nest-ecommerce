@@ -23,6 +23,13 @@ export async function GET() {
       );
     }
 
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const blogs = await prisma.blogPost.findMany({
       orderBy: {
         createdAt: "desc",
@@ -47,6 +54,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Unauthorized. Admin or Staff access required." },
         { status: 403 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 

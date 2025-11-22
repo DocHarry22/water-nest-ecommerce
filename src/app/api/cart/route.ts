@@ -13,6 +13,13 @@ export async function GET() {
       );
     }
 
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     // Upsert to avoid separate create query
     const cart = await prisma.cart.upsert({
       where: { userId: session.user.id },
@@ -60,6 +67,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 
@@ -159,6 +173,13 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 

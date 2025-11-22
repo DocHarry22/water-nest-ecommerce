@@ -32,6 +32,13 @@ export async function PUT(
       );
     }
 
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const { id } = await params;
     const productId = id;
 
@@ -74,6 +81,13 @@ export async function DELETE(
       return NextResponse.json(
         { error: "Unauthorized. Admin access required." },
         { status: 403 }
+      );
+    }
+
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
       );
     }
 

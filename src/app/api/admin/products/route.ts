@@ -29,6 +29,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
     console.log("Received product data:", JSON.stringify(body, null, 2));
     

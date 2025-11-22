@@ -47,6 +47,13 @@ export async function GET(
   try {
     const { slug } = await params;
     
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database unavailable during build" },
+        { status: 503 }
+      );
+    }
+    
     // Check if slug is actually an ID (cuid format or simple number)
     const isId = slug.match(/^[0-9]+$/) || (slug.startsWith('c') && slug.length > 20);
     
